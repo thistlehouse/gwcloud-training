@@ -4,3 +4,4 @@
     - Write your first code using C# Part 1
     - Create and run simple C# console applications Part 2
     - Add logic to C# console applications Part 3
+    - Work with variable data in C# console applications Part 4
