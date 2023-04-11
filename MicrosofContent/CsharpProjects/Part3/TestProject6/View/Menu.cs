@@ -1,0 +1,334 @@
+using TestProejct6.Models;
+
+namespace TestProejct6.View;
+
+public class Menu
+{
+    private List<Pet> Pets = new List<Pet>()
+    {
+        new Pet 
+        { 
+            PetId = "d1", 
+            PetAge = "4", 
+            PetSpecies = "Dog", 
+            PetPhysicalDescription = "Great Dane - An extra-large brindle dog with a short and sleek coat, warm brown eyes, and medium-sized floppy ears.",
+            PetPersonalityDescription = "Affectionate and playful",
+            PetNickname = "Bow"
+        },
+        new Pet
+        {
+            PetId = "c2",
+            PetAge = "2",
+            PetSpecies = "Cat",
+            PetPhysicalDescription = "Siamese - A medium-sized cat with a short and sleek seal point coat, almond-shaped blue eyes, and large pointed ears.",
+            PetPersonalityDescription = "Bold and confident",
+            PetNickname = "Charlie"
+        },
+        new Pet
+        {
+            PetId = "d3",
+            PetAge = "1",
+            PetSpecies = "Dog",
+            PetPhysicalDescription = "Siberian Husky - A medium to large black and white dog with a thick and fluffy coat, blue eyes, and pointed erect ears.",
+            PetPersonalityDescription = "Vocal and talkative",
+            PetNickname = "Jack"
+        },
+        new Pet
+        {
+            PetId = "c4",
+            PetAge = "1",
+            PetSpecies = "Cat",
+            PetPhysicalDescription = "Siamese - A medium-sized cat with a short and sleek seal point coat, almond-shaped blue eyes, and large pointed ears.",
+            PetPersonalityDescription = "Affectionate and playful",
+            PetNickname = "Charlie"
+        },
+    };
+    public Menu() {}
+
+    public int MenuOption()
+    {
+        int inputRead = 0;
+
+        Console.WriteLine("1. List all of our current pet information.");
+        Console.WriteLine("2. Assign values to the ourAnimals array fields.");
+        Console.WriteLine("3. Ensure animal ages and physical descriptions are complete.");
+        Console.WriteLine("4. Ensure animal nicknames and personality descriptions are complete.");
+        Console.WriteLine("5. Edit an animal’s age.");
+        Console.WriteLine("6. Edit an animal’s personality description.");
+        Console.WriteLine("7. Display all cats with a specified characteristic.");
+        Console.WriteLine("8. Display all dogs with a specified characteristic.");        
+        inputRead = Convert.ToInt32(Console.ReadLine());
+
+        return inputRead;
+    }
+
+    public void Render()
+    {   
+        bool exit = false;
+
+        while (!exit)
+        {
+            int inputRead = MenuOption();
+
+            switch(inputRead)
+            {
+                case 0:
+                    exit = true;
+                    break;
+                case 1:
+                    ListAllPets();                    
+                    break;
+                case 2:
+                    AddNewPet();
+                    break;
+                case 3:     
+                    EnsureAgePhysicalDescription();
+                    break;
+                case 4:
+                    EnsureNicknamePersonality();
+                    break;
+                case 5:
+                    EditPetAge();
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    DisplayCatsByCharacteristics();
+                    break;
+                case 8: 
+                    DisplayDogsByCharacteristics();
+                    break;
+            }
+        }
+    }
+
+    public void ListAllPets()
+    {   
+        foreach (Pet pet in Pets)
+        {
+            Console.WriteLine("\n"+ "Id #: " + pet.PetId);
+            Console.WriteLine("Age: " + pet.PetAge);
+            Console.WriteLine("Physical Description: " + pet.PetPhysicalDescription);
+            Console.WriteLine("Personality: " + pet.PetPersonalityDescription);
+            Console.WriteLine("Nickname: " + pet.PetNickname);
+        }
+
+        Console.WriteLine();
+    }
+
+    public void AddNewPet()
+    {
+        int lastIndex = Pets.Count;
+        
+        string petId = "";
+        string petSpecies = "";
+        string petAge = "";
+        string petPhysicalDescription = "";
+        string petPersonalityDescription = "";
+        string petNickname = "";
+
+        do
+        {
+            Console.WriteLine("Type Pet\'s Species: ");
+            petSpecies = Console.ReadLine().ToLower();
+        } while (petSpecies == "");
+        
+        if (petSpecies == "dog") petId = "d" + (lastIndex + 1).ToString();
+        else if (petSpecies == "cat") petId = "c" + (lastIndex + 1).ToString();
+
+        Console.WriteLine("\nLeave it blank if info is unknown.");
+        Console.WriteLine("Type Pet\'s Age: ");
+        petAge = Console.ReadLine();
+
+        Console.WriteLine("Type Pet\'s Physical Description: ");
+        petPhysicalDescription = Console.ReadLine();
+
+        Console.WriteLine("Type Pet\'s Personality: ");
+        petPersonalityDescription = Console.ReadLine();
+
+        Console.WriteLine("Type Pet\'s Nickname: ");
+        petNickname = Console.ReadLine();
+
+        if (petAge == "" && petPhysicalDescription == ""
+            && petPersonalityDescription == "" && petNickname == "")
+        {
+            petAge = "Unknown";
+            petPhysicalDescription = "Unknown";
+            petPersonalityDescription = "Unknown";
+            petNickname = "Unknown";
+        }
+
+        Pet pet = new Pet();
+
+        pet.PetId = petId;
+        pet.PetAge = petAge;
+        pet.PetSpecies = petSpecies;
+        pet.PetPhysicalDescription = petPhysicalDescription;
+        pet.PetPersonalityDescription = petPersonalityDescription;
+        pet.PetNickname = petNickname;
+
+        Pets.Add(pet);
+
+        ListAllPets();        
+    }
+
+    public void EnsureAgePhysicalDescription()
+    {
+        string petId = "";
+        string petAge = "";
+        string petPhysicalDescription = "";
+
+        do
+        {
+            Console.WriteLine("Type Pet\'s Id: ");
+            petId = Console.ReadLine();
+
+            Console.WriteLine("Type Pet\'s Age: ");
+            petAge = Console.ReadLine();
+
+            Console.WriteLine("Type Pet\'s Physical Description: ");
+            petPhysicalDescription = Console.ReadLine();
+        } while (petId == "" && petAge == "" && petPhysicalDescription == "");
+
+        Pet pet = Pets.FirstOrDefault(p => p.PetId == petId);
+
+        pet.PetAge = petAge;
+        pet.PetPhysicalDescription = petPhysicalDescription;
+
+        ListAllPets();
+    }
+
+    public void EnsureNicknamePersonality()
+    {
+        string petId = "";
+        string petNickname = "";
+        string petPersonality = "";
+
+        do
+        {
+            Console.WriteLine("Type Pet\'s Id: ");
+            petId = Console.ReadLine();
+
+            Console.WriteLine("Type Pet\'s Nickname: ");
+            petNickname = Console.ReadLine();
+
+            Console.WriteLine("Type Pet\'s Personality: ");
+            petPersonality = Console.ReadLine();
+        } while (petId == "" && petNickname == "" && petPersonality == "");
+
+        Pet pet = Pets.FirstOrDefault(p => p.PetId == petId);
+
+        pet.PetNickname = petNickname;
+        pet.PetPersonalityDescription = petPersonality;
+
+        ListAllPets();
+    }
+
+    public void EditPetAge()
+    {
+        string petId = "";
+        string petAge = "";
+
+        do 
+        {
+            Console.WriteLine("Type Pet\'s Id");
+            petId = Console.ReadLine();
+
+            Console.WriteLine("Type Pet\'s Age and birthday (e.g 3 - 02/28/2000): ");
+            petAge = Console.ReadLine();
+        } while (petAge == "" && petId == "");
+
+        Pet pet = Pets.FirstOrDefault(p => p.PetId == petId);
+        pet.PetAge = petAge;
+    }
+
+    public void EditPetPersonality()
+    {
+        string petId = "";
+        string petPersonalty = "";
+
+        do 
+        {
+            Console.WriteLine("Type Pet\'s Id");
+            petId = Console.ReadLine();
+
+            Console.WriteLine("Type Pet\'s Personality: ");
+            petPersonalty = Console.ReadLine();
+        } while (petPersonalty == "" && petId == "");
+
+        Pet pet = Pets.FirstOrDefault(p => p.PetId == petId);
+        pet.PetPersonalityDescription = petPersonalty;
+    }
+
+    public void DisplayCatsByCharacteristics()
+    {
+        string characteristic = "";
+
+        List<Pet> cats = Pets.Where(p => p.PetSpecies == "Cat").ToList();
+        List<Pet> catsFound = new List<Pet>();
+
+        do
+        {
+            Console.WriteLine("Type Cat\'s Characteristic: ");
+            characteristic = Console.ReadLine(); 
+            // characteristic = "Affectionate";                                           
+        } while (characteristic == "");
+
+        bool containsInPersonality = false;
+        bool containsInPhysical = false;
+
+        foreach (Pet pet in cats)
+        {
+            containsInPersonality = pet.PetPersonalityDescription.Contains(characteristic);
+            containsInPhysical = pet.PetPhysicalDescription.Contains(characteristic);
+
+            if (containsInPersonality || containsInPhysical)
+                catsFound.Add(pet);
+        }
+
+        foreach (Pet cat in catsFound)
+        {
+            Console.WriteLine("\n"+ "Id #: " + cat.PetId);
+            Console.WriteLine("Age: " + cat.PetAge);
+            Console.WriteLine("Physical Description: " + cat.PetPhysicalDescription);
+            Console.WriteLine("Personality: " + cat.PetPersonalityDescription);
+            Console.WriteLine("Nickname: " + cat.PetNickname+"\n");
+        }
+    }
+
+    
+    public void DisplayDogsByCharacteristics()
+    {
+        string characteristic = "";
+
+        List<Pet> dogs = Pets.Where(p => p.PetSpecies == "Dog").ToList();
+        List<Pet> dogsFound = new List<Pet>();
+
+        do
+        {
+            Console.WriteLine("Type Dog\'s Characteristic: ");
+            characteristic = Console.ReadLine();                                                     
+        } while (characteristic == "");
+
+        bool containsInPersonality = false;
+        bool containsInPhysical = false;
+
+        foreach (Pet pet in dogs)
+        {
+            containsInPersonality = pet.PetPersonalityDescription.Contains(characteristic);
+            containsInPhysical = pet.PetPhysicalDescription.Contains(characteristic);
+
+            if (containsInPersonality || containsInPhysical)
+                dogsFound.Add(pet);
+        }
+
+        foreach (Pet cat in dogsFound)
+        {
+            Console.WriteLine("\n"+ "Id #: " + cat.PetId);
+            Console.WriteLine("Age: " + cat.PetAge);
+            Console.WriteLine("Physical Description: " + cat.PetPhysicalDescription);
+            Console.WriteLine("Personality: " + cat.PetPersonalityDescription);
+            Console.WriteLine("Nickname: " + cat.PetNickname+"\n");
+        }
+    }
+}
