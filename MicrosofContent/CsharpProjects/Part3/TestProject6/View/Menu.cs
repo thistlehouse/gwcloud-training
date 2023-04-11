@@ -36,8 +36,17 @@ public class Menu
         new Pet
         {
             PetId = "c4",
-            PetAge = "1",
+            PetAge = "",
             PetSpecies = "Cat",
+            PetPhysicalDescription = "Unkown",
+            PetPersonalityDescription = "Affectionate and playful",
+            PetNickname = "Boomer"
+        },
+                new Pet
+        {
+            PetId = "d5",
+            PetAge = "1",
+            PetSpecies = "Dog",
             PetPhysicalDescription = "Siamese - A medium-sized cat with a short and sleek seal point coat, almond-shaped blue eyes, and large pointed ears.",
             PetPersonalityDescription = "Affectionate and playful",
             PetNickname = "Charlie"
@@ -104,14 +113,27 @@ public class Menu
 
     public void ListAllPets()
     {   
+        List<string> ids = new List<string>();
+
         foreach (Pet pet in Pets)
         {
+            if (pet.PetAge == "Unkown" || pet.PetPhysicalDescription == "Unkown" ||
+                pet.PetPersonalityDescription == "Unkown" || pet.PetNickname == "Unkown")
+                ids.Add(pet.PetId);
+
             Console.WriteLine("\n"+ "Id #: " + pet.PetId);
             Console.WriteLine("Age: " + pet.PetAge);
             Console.WriteLine("Physical Description: " + pet.PetPhysicalDescription);
             Console.WriteLine("Personality: " + pet.PetPersonalityDescription);
             Console.WriteLine("Nickname: " + pet.PetNickname);
-        }
+            Console.WriteLine("=========");
+            
+            string petSingularOrPlural = (ids.Count > 1) ? "pets" : "pet";
+            string needFirstOrThird = (ids.Count > 1) ? "need" : "needs";
+
+            Console.WriteLine($"There\'s {ids.Count} {petSingularOrPlural} " + 
+                $"that {needFirstOrThird} info to be inserted.");
+        }   
 
         Console.WriteLine();
     }
