@@ -133,8 +133,7 @@ public class Menu
             petSpecies = Console.ReadLine().ToLower();
         } while (petSpecies == "");
         
-        if (petSpecies == "dog") petId = "d" + (lastIndex + 1).ToString();
-        else if (petSpecies == "cat") petId = "c" + (lastIndex + 1).ToString();
+        petId = petSpecies.Substring(1).ToLower() + (lastIndex + 1).ToString();        
 
         Console.WriteLine("\nLeave it blank if info is unknown.");
         Console.WriteLine("Type Pet\'s Age: ");
