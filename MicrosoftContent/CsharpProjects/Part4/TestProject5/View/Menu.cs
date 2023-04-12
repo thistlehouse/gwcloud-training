@@ -46,7 +46,7 @@ public class Menu
             PetNickname = "Boomer",
             SuggestedDonation = ""
         },
-                new Pet
+        new Pet
         {
             PetId = "d5",
             PetAge = "1",
