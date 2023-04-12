@@ -127,13 +127,13 @@ public class Menu
             Console.WriteLine("Personality: " + pet.PetPersonalityDescription);
             Console.WriteLine("Nickname: " + pet.PetNickname);
             Console.WriteLine("=========");
-            
-            string petSingularOrPlural = (ids.Count > 1) ? "pets" : "pet";
-            string needFirstOrThird = (ids.Count > 1) ? "need" : "needs";
+        }
 
-            Console.WriteLine($"There\'s {ids.Count} {petSingularOrPlural} " + 
-                $"that {needFirstOrThird} info to be inserted.");
-        }   
+        string petSingularOrPlural = (ids.Count > 1) ? "pets" : "pet";
+        string needFirstOrThird = (ids.Count > 1) ? "need" : "needs";
+
+        Console.WriteLine($"There\'s {ids.Count} {petSingularOrPlural} " + 
+            $"that {needFirstOrThird} info to be inserted.");
 
         Console.WriteLine();
     }
@@ -262,7 +262,7 @@ public class Menu
         Pet pet = Pets.FirstOrDefault(p => p.PetId == petId);
         pet.PetAge = petAge;
     }
-
+    
     public void EditPetPersonality()
     {
         string petId = "";
@@ -280,7 +280,7 @@ public class Menu
         Pet pet = Pets.FirstOrDefault(p => p.PetId == petId);
         pet.PetPersonalityDescription = petPersonalty;
     }
-
+    
     public void DisplayCatsByCharacteristics()
     {
         string characteristic = "";
@@ -317,7 +317,6 @@ public class Menu
         }
     }
 
-    
     public void DisplayDogsByCharacteristics()
     {
         string characteristic = "";
