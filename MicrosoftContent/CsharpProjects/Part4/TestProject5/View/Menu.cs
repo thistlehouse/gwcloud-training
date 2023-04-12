@@ -331,13 +331,13 @@ public class Menu
                 Console.WriteLine($"None of our dogs are a match found for: {characteristic}");
         }
 
-        foreach (Pet cat in dogsFound)
+        foreach (Pet dog in dogsFound)
         {
-            Console.WriteLine("\n"+ "Id #: " + cat.PetId);
-            Console.WriteLine("Age: " + cat.PetAge);
-            Console.WriteLine("Physical Description: " + cat.PetPhysicalDescription);
-            Console.WriteLine("Personality: " + cat.PetPersonalityDescription);
-            Console.WriteLine("Nickname: " + cat.PetNickname+"\n");
+            Console.WriteLine("\n"+ "Id #: " + dog.PetId);
+            Console.WriteLine("Age: " + dog.PetAge);
+            Console.WriteLine("Physical Description: " + dog.PetPhysicalDescription);
+            Console.WriteLine("Personality: " + dog.PetPersonalityDescription);
+            Console.WriteLine("Nickname: " + dog.PetNickname+"\n");
         }
     }
 
