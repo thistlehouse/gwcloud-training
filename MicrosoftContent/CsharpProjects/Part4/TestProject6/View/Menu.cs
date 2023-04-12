@@ -46,7 +46,7 @@ public class Menu
             PetNickname = "Boomer",
             SuggestedDonation = ""
         },
-                new Pet
+        new Pet
         {
             PetId = "d5",
             PetAge = "1",
@@ -57,40 +57,38 @@ public class Menu
             SuggestedDonation = ""
         },
     };
+
+    string readInput = "";
+    string menuOption = "";
+
     public Menu() {}
 
-    public int MenuOption()
+    public void MenuOption()
     {
-        int inputRead = 0;
-
         Console.WriteLine("1. List all of our current pet information.");        
-        Console.WriteLine("2. Display all dogs with a specified characteristic.");        
-        inputRead = Convert.ToInt32(Console.ReadLine());
-
-        return inputRead;
+        Console.WriteLine("2. Display all dogs with a specified characteristic.");
     }
 
     public void Render()
     {   
-        bool exit = false;
+        MenuOption();
 
-        while (!exit)
+        readInput = Console.ReadLine();        
+
+        do
         {
-            int inputRead = MenuOption();
+            if (readInput != null) menuOption = readInput.ToLower();
 
-            switch(inputRead)
+            switch(menuOption)
             {
-                case 0:
-                    exit = true;
-                    break;
-                case 1:
+                case "1":
                     ListAllPets();                    
                     break;
-                case 2:
+                case "2":
                     DisplayDogsByCharacteristics();
                     break;
             }
-        }
+        } while (menuOption != "exit");
     }
 
     public void ListAllPets()
@@ -306,9 +304,9 @@ public class Menu
 
     public void DisplayDogsByCharacteristics()
     {
-        string characteristic = "";
-        
-        string[] characteristicWords = characteristic.Split(",");
+        string characteristics = "";        
+
+        string[] searchingAnimation = { "|", "/", "--", "\\", " *" };        
 
         List<Pet> dogs = Pets.Where(p => p.PetSpecies == "Dog").ToList();
         List<Pet> dogsFound = new List<Pet>();
@@ -316,34 +314,65 @@ public class Menu
         do
         {
             Console.WriteLine("Type Dog\'s Characteristic: ");
-            characteristic = Console.ReadLine();                                                     
-        } while (characteristic == "");
+            characteristics = Console.ReadLine().ToLower();                                               
+        } while (characteristics == "");
 
-        bool containsInPersonality = false;
-        bool containsInPhysical = false;
+        Console.WriteLine();
+
+        string[] searchWords = characteristics.Split(",");
+
+        for (int i = 0; i < searchWords.Length; i++)
+        {
+            searchWords[i] = searchWords[i].Trim();
+        }
+
+        bool containsInPersonality = false;      
 
         foreach (Pet pet in dogs)
         {
-            foreach(string word in characteristicWords)
+            bool dogMatches = false;
+
+            foreach(string word in searchWords)
             {
-                containsInPersonality = pet.PetPersonalityDescription.Contains(characteristic);
-                containsInPhysical = pet.PetPhysicalDescription.Contains(characteristic);
+                foreach (string anim in searchingAnimation)
+                {
+                    Console.Write($"\rSearching... {anim} {word}");
+                    Thread.Sleep(200);
+                    
+                    Console.Write($"\r{new String(' ', Console.BufferWidth)}");
+                }
 
-                if (containsInPersonality || containsInPhysical)
-                    dogsFound.Add(pet);
-                else
-                    Console.WriteLine($"None of our dogs are a match found for: {characteristic}");
+                string petPersonality = pet.PetPersonalityDescription.ToLower();
+
+                containsInPersonality = petPersonality.Contains(word);
+
+                if (containsInPersonality)
+                {
+                    Console.WriteLine($"\rOur dog {pet.PetNickname} is a {word}");
+
+                    dogMatches = true;
+                }
             }
+
+            if (dogMatches) dogsFound.Add(pet);
         }
 
-        foreach (Pet dog in dogsFound)
+        if (dogsFound.Any())
         {
-            Console.WriteLine("\n"+ "Id #: " + dog.PetId);
-            Console.WriteLine("Age: " + dog.PetAge);
-            Console.WriteLine("Physical Description: " + dog.PetPhysicalDescription);
-            Console.WriteLine("Personality: " + dog.PetPersonalityDescription);
-            Console.WriteLine("Nickname: " + dog.PetNickname+"\n");
+            foreach (Pet dog in dogsFound)
+            {
+                Console.WriteLine("\n"+ "Id #: " + dog.PetId);
+                Console.WriteLine("Age: " + dog.PetAge);
+                Console.WriteLine("Physical Description: " + dog.PetPhysicalDescription);
+                Console.WriteLine("Personality: " + dog.PetPersonalityDescription);
+                Console.WriteLine("Nickname: " + dog.PetNickname+"\n");
+            }            
         }
+        else
+            Console.WriteLine($"None of our dogs are a match for: {characteristics}\n");
+
+        Console.WriteLine("\n\rPress the Enter key to continue");
+        readInput = Console.ReadLine();
     }
 
     public decimal SuggestedDonationToDecimal(Pet pet)
