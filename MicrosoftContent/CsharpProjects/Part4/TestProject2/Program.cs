@@ -26,9 +26,7 @@ string[] orderStreamArray = orderStream.Split(",");
 
 foreach(string order in orderStreamArray)
 {
-    char[] orderId = order.ToCharArray();
-
-    if (orderId.Length == 4)
+    if (order.Length == 4)
         Console.WriteLine(order);
     else
         Console.WriteLine(order + "\t- Error");
