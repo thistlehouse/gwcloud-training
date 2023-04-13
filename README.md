@@ -1,5 +1,6 @@
 # Training projects for .NET developer
 - Build .NET applications with C#
+- BDD Sample Project (in group)
 - Write your first code using C#
     - Write your first code using C# Part 1
     - Create and run simple C# console applications Part 2
