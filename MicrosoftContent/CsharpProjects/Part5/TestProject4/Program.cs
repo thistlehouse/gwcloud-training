@@ -24,6 +24,8 @@ string player = states[0];
 // Index of the current food
 int food = 0;
 
+// int speed = 1;
+
 InitializeGame();
 while (!shouldExit) 
 {   
@@ -36,7 +38,7 @@ while (!shouldExit)
     else
     {
         if (PlayerIsFaster())         
-            Move(1, false);         
+            Move(2, false);         
         else if (PlayerIsSick())         
             FreezePlayer();
         else 
@@ -112,16 +114,16 @@ void Move(int speed = 1, bool nondirectional = true)
     switch (input) 
     {
         case ConsoleKey.UpArrow:
-            playerY -= (1 * speed); 
+            playerY--; 
             break;
 		case ConsoleKey.DownArrow: 
-            playerY += (1 * speed); 
+            playerY++; 
             break;
 		case ConsoleKey.LeftArrow:  
-            playerX -= (1 * speed); 
+            playerX -= speed; 
             break;
 		case ConsoleKey.RightArrow: 
-            playerX += (1 * speed); 
+            playerX += speed; 
             break;
 		case ConsoleKey.Escape:     
             shouldExit = true; 
