@@ -7,3 +7,4 @@
     - Add logic to C# console applications Part 3
     - Work with variable data in C# console applications Part 4
     - Create methods in C# console applications Part 5
+    - Debug C# console applications Part 6
