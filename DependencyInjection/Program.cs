@@ -9,8 +9,9 @@ using Microsoft.Extensions.Hosting;
 var serviceProvider = new ServiceCollection()
     .AddSingleton<ICalculatorService, CalculatorService>()
     .AddSingleton<IDisplayMenuService, DisplayMenuService>()
-    .AddScoped<IMathematicOperation, MathematicOperation>()
     .AddSingleton<ICalculator, Calculator>()
+    .AddSingleton<IInputReaderService, InputReaderService>()
+    .AddScoped<IMathematicOperation, MathematicOperation>()
     .BuildServiceProvider();
 
 var calculator = serviceProvider.GetService<ICalculator>();

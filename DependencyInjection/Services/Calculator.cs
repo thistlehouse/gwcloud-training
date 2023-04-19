@@ -1,5 +1,6 @@
 namespace DI.Domain;
 
+using System.Collections.Generic;
 using DI.Services;
 
 public class Calculator : ICalculator
@@ -8,39 +9,28 @@ public class Calculator : ICalculator
     public decimal rightNumber { get; set; }      
     private bool exit = true;
 
+    private readonly IInputReaderService _inputReaderService;
     private readonly ICalculatorService _calculatorService;
     private readonly IDisplayMenuService _displayMenuService;
-    
-    public Calculator(ICalculatorService calculatorService,  IDisplayMenuService displayMenuService)
+
+    public Calculator(ICalculatorService calculatorService, IDisplayMenuService displayMenuService, IInputReaderService inputReaderService)
     {
         _calculatorService = calculatorService;
         _displayMenuService = displayMenuService;
+        _inputReaderService = inputReaderService;
     }
-    
+
     public void Run()
     {
         Console.Clear();
 
         while (exit)
         {
-            int readInput = 0;
+            int readInput = -1;
 
-            bool success = false;
-
-            while (!success && readInput == 0)
-            {
-                DisplayMainMenu();
+            _displayMenuService.DisplayMainMenu();
                 
-                success = int.TryParse(Console.ReadLine(), out readInput);;
-
-                if (!success)             
-                {
-                    Console.WriteLine("Invalid input. Type a key to continue.");
-                    Console.ReadKey();                
-                }
-
-                Console.Clear();
-            }
+            readInput = _inputReaderService.MenuOptionIndex();
 
             switch (readInput)
             {
@@ -52,61 +42,46 @@ public class Calculator : ICalculator
                     Console.Clear();
                     break;
                 case 1:
-                {
-                    var numbers = GetNumbers(true);
-                    var result =  _calculatorService.Add(numbers["leftNumber"], 
-                                                        numbers["rightNumber"]);
-                    
-                    Console.WriteLine($"Result: {result}");
-                    PressAnyKeyToContinue();
+                    PerformCalculation(readInput);
                     break;
-                }
-                case 2: 
-                {
-                    var numbers = GetNumbers(true);
-                    var result =  _calculatorService.Subtract(numbers["leftNumber"], 
-                                                            numbers["rightNumber"]);
-
-                    Console.WriteLine($"Result: {result}");
-                    PressAnyKeyToContinue();
+                case 2:
+                    PerformCalculation(readInput);
                     break;
-                }
-                case 3: 
-                {
-                    var numbers = GetNumbers(true);
-                    var result =  _calculatorService.Multiply(numbers["leftNumber"], 
-                                                            numbers["rightNumber"]);
-
-                    Console.WriteLine($"Result: {result}");
-                    PressAnyKeyToContinue();
+                case 3:
+                    PerformCalculation(readInput);
                     break;
-                }
                 case 4:
-                {
-                    var numbers = GetNumbers(false);
-                    var result =  _calculatorService.Divide(numbers["leftNumber"], 
-                                                            numbers["rightNumber"]);
-
-                    Console.WriteLine($"Result: {result}");
-                    PressAnyKeyToContinue(); 
+                    PerformCalculation(readInput);
                     break;
-                }
+                
             };
         }
     }
 
-    public void DisplayMainMenu()
+    public decimal PerformCalculation(int menuOptionIndex)
     {
-        _displayMenuService.DisplayMainMenu(); 
-    }
-    
-    Dictionary<string, decimal> GetNumbers(bool canUseZero)
-    {
-        return _displayMenuService.GetNumbers(canUseZero);                  
-    }
+        bool canUseZero = true;
 
-    void PressAnyKeyToContinue()
-    {
-       _displayMenuService.PressAnyKeyToContinue();
+        if (menuOptionIndex == 4)
+        {
+            canUseZero = false;
+        }
+
+        var numbers = _inputReaderService.GetNumbers(canUseZero);
+
+        var result = menuOptionIndex switch
+        {
+            1 => _calculatorService.Add(numbers["leftNumber"], numbers["rightNumber"]),
+            2 => _calculatorService.Subtract(numbers["leftNumber"], numbers["rightNumber"]),
+            3 => _calculatorService.Multiply(numbers["leftNumber"], numbers["rightNumber"]),
+            4 => _calculatorService.Divide(numbers["leftNumber"], numbers["rightNumber"]),
+            _ => 0.0m
+        };
+
+        Console.WriteLine($"Result: {result}");
+
+        Console.Clear();
+
+        return result;
     }
 }

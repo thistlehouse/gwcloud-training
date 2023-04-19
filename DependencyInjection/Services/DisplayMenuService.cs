@@ -6,10 +6,10 @@ namespace DI.Services;
 public class DisplayMenuService : IDisplayMenuService
 {
     private readonly IMathematicOperation _mathematicOperation;
-
-    public DisplayMenuService(IMathematicOperation mathematicOperation)
+    
+    public DisplayMenuService(IMathematicOperation mathematicOperation, IInputReaderService inputReaderService)
     {
-        _mathematicOperation = mathematicOperation;
+        _mathematicOperation = mathematicOperation;        
     }
 
     public List<Operation> CreateMenu()
@@ -27,68 +27,11 @@ public class DisplayMenuService : IDisplayMenuService
 
     public void DisplayMainMenu()
     {
-        //mathematicOperation.Create(new string[]{"Soma", "Subtração"});
+        //mathematicOperation.Create(new string[]{"Addition", "Subtraction"});
         var operation = CreateMenu();  
         
         Console.WriteLine("========== Calculator ==========");
 
         operation.ForEach(o => Console.WriteLine(o.MathOperation));
-    }
-
-    public Dictionary<string, decimal> GetNumbers(bool canUseZero)
-    {
-        decimal leftNumber, rightNumber;
-        
-        bool left, right = false;
-
-        do
-        {
-            Console.WriteLine("Type the first number");
-            left = decimal.TryParse(Console.ReadLine(), out leftNumber);
-
-            if (!left)        
-                Console.WriteLine("Invalid input. Type a key to continue.");  
-
-            Console.Clear();      
-        } while (!left);
-
-        do
-        {
-            Console.WriteLine("Type the second number");
-            right = decimal.TryParse(Console.ReadLine(), out rightNumber);
-
-            if (!right)
-            {
-                Console.WriteLine("Invalid input. Type a key to continue.");
-            }
-            
-            while (!canUseZero)
-            {
-                Console.Clear();
-                Console.WriteLine("Number must be greater than zero.");
-                Console.WriteLine("Type the second number again");
-                right = decimal.TryParse(Console.ReadLine(), out rightNumber);
-
-                if (rightNumber > 0)
-                    canUseZero = true;
-            }
-
-            Console.Clear();
-        } while (!right);
-
-        Dictionary<string, decimal> numbers = new Dictionary<string, decimal>()
-        {
-            {"leftNumber", leftNumber},
-            {"rightNumber", rightNumber}
-        };
-
-        return  numbers;
-    }
-
-    public void PressAnyKeyToContinue()
-    {
-        Console.WriteLine("Press any keyto continue.");
-        Console.ReadKey(); 
-        Console.Clear(); 
     }
 }
