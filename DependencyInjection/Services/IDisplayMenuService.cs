@@ -1,3 +1,5 @@
+using DI.Domain;
+
 namespace DI.Services;
 
 public interface IDisplayMenuService
@@ -5,4 +7,5 @@ public interface IDisplayMenuService
     void DisplayMainMenu();
     Dictionary<string, decimal> GetNumbers(bool canUseZero);
     void PressAnyKeyToContinue();
+    List<Operation> CreateMenu();
 }

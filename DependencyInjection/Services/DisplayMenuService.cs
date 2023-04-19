@@ -1,15 +1,38 @@
+using System.Linq;
+using DI.Domain;
+
 namespace DI.Services;
 
 public class DisplayMenuService : IDisplayMenuService
 {
+    private readonly IMathematicOperation _mathematicOperation;
+
+    public DisplayMenuService(IMathematicOperation mathematicOperation)
+    {
+        _mathematicOperation = mathematicOperation;
+    }
+
+    public List<Operation> CreateMenu()
+    {
+        var operations = new List<Operation>();
+
+        operations.Add(_mathematicOperation.Create("1 - Addition"));
+        operations.Add(_mathematicOperation.Create("2 - Subtraction"));
+        operations.Add(_mathematicOperation.Create("3 - Multiplication"));
+        operations.Add(_mathematicOperation.Create("4 - Division"));
+        operations.Add(_mathematicOperation.Create("0 - Exit"));
+
+        return operations;
+    }
+
     public void DisplayMainMenu()
     {
+        //mathematicOperation.Create(new string[]{"Soma", "Subtração"});
+        var operation = CreateMenu();  
+        
         Console.WriteLine("========== Calculator ==========");
-        Console.WriteLine("1 -  Add");
-        Console.WriteLine("2 - Subtrac");
-        Console.WriteLine("3 - Multiply");
-        Console.WriteLine("4 - Divide");
-        Console.WriteLine("0 - Exit");      
+
+        operation.ForEach(o => Console.WriteLine(o.MathOperation));
     }
 
     public Dictionary<string, decimal> GetNumbers(bool canUseZero)
