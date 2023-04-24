@@ -14,14 +14,14 @@ classDiagram
 
     class ICalculator {
         <<interface>> 
+        +PerformCalculation(int menuOptionIndex) decimal
         +Run() void
     }
 
     class Calculator {
         -IInputReaderService inputReaderService
         -ICalculatorService calculatorService
-        -IDisplayMenuService displayMenuService
-        -PerformCalculation(int menuOptionIndex) decimal
+        -IDisplayMenuService displayMenuService        
     }
 
     class BackgroundService {
