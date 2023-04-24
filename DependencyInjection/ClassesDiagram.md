@@ -62,11 +62,11 @@ classDiagram
 ```mermaid
 classDiagram
     class IMathOperation {
-        + Operation: Create(string operation)
+        +Create(string operation) Operation
     }
 
     class MathOperation {
-        + Operatoin: Create(string operation)
+        +Create(string operation) Operation
     }
 
     IMathOperation <|-- MathOperation : implements
@@ -74,7 +74,7 @@ classDiagram
 ```mermaid
 classDiagram
     class Operation {
-        + string: MathOperation
-        + Operation(string mathOperation)
+        +MathOperation string
+        +Operation(string mathOperation)
     }
 ```
