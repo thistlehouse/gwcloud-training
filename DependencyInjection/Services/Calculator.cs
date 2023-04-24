@@ -1,9 +1,12 @@
-namespace DI.Domain;
+namespace DI.Services;
 
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using DI.Services;
+using Microsoft.Extensions.Hosting;
 
-public class Calculator : ICalculator
+public class Calculator : BackgroundService, ICalculator
 {
     public decimal leftNumber { get; set; }
     public decimal rightNumber { get; set; }      
@@ -52,13 +55,12 @@ public class Calculator : ICalculator
                     break;
                 case 4:
                     PerformCalculation(readInput);
-                    break;
-                
+                    break;                
             };
         }
     }
 
-    public decimal PerformCalculation(int menuOptionIndex)
+    private decimal PerformCalculation(int menuOptionIndex)
     {
         bool canUseZero = true;
 
@@ -83,5 +85,15 @@ public class Calculator : ICalculator
         Console.Clear();
 
         return result;
+    }
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            Run();
+
+            await Task.Delay(1000, stoppingToken);
+        }
     }
 }
