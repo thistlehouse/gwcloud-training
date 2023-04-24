@@ -8,9 +8,9 @@ namespace DI.Services
 {
     public class MathematicOperation : IMathematicOperation
     {
-        public Operation Create(string operacao)
+        public Operation Create(string operation)
         {
-            return new Operation(operacao);
+            return new Operation(operation);
         }
     }
 }
