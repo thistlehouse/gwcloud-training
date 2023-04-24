@@ -74,7 +74,7 @@ classDiagram
 ```mermaid
 classDiagram
     class Operation {
-        +MathOperation string
+        +string MathOperation
         +Operation(string mathOperation)
     }
 ```
