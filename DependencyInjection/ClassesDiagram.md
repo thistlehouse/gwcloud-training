@@ -1,72 +1,80 @@
 ```mermaid
 classDiagram
-class ICalculatorService {
-    <<interface>> 
-    decimal: +Add(decimal x, decimal y)
-    decimal: +Subtract(decimal x, decimal y)
-    decimal: +Multiply(decimal x, decimal y)
-    decimal: +Divide(decimal x, decimal y)
-} 
-    
+    class ICalculatorService {
+        <<interface>> 
+        +Add(decimal x, decimal y) decimal
+        +Subtract(decimal x, decimal y) decimal
+        +Multiply(decimal x, decimal y) decimal
+        +Divide(decimal x, decimal y) decimal
+    } 
+        
     class CalculatorService {
 
     }
 
     class ICalculator {
         <<interface>> 
-        void: +Run()
+        +Run() void
     }
 
     class Calculator {
-        - IInputReaderService inputReaderService
-        - ICalculatorService calculatorService
-        - IDisplayMenuService displayMenuService
-        - decimal: PerformCalculation(int menuOptionIndex)
+        -IInputReaderService inputReaderService
+        -ICalculatorService calculatorService
+        -IDisplayMenuService displayMenuService
+        -PerformCalculation(int menuOptionIndex) decimal
     }
 
     class BackgroundService {
         <<abstract>>
-        - Task: ExecuteAsync(CancellationToken stoppingToken)
+        -ExecuteAsync(CancellationToken stoppingToken) Task
     }
 
+    ICalculatorService <|--  CalculatorService : implements
+    ICalculator <|-- Calculator : implements
+    BackgroundService <|-- Calculator : Inheritance
+```
+```mermaid
+classDiagram
     class IDisplayMenuService {
         <<interface>> 
-        void: +DisplayMenu()
-        List<Operation>: CreateMenu()
+        +DisplayMenu()  void
+        +CreateMenu()  List<Operation>
     }
 
     class DisplayMenuService {
-        - IMathematicOpertion mathematicOperation
+        -IMathematicOpertion mathematicOperation
     }
 
     class IInputReaderService {
         <<interface>> 
-        int: MenuOptionIndex()
-        Dictionary<string, decimal>: GetNumbers(bool canUseZero)
-        void: PressAnyKeyToContinue()
+        +MenuOptionIndex()  int
+        +GetNumbers(bool canUseZero)  Dictionary<string, decimal>
+        +PressAnyKeyToContinue()  void
     }
 
     class InputReaderService {
 
     }
 
+    IDisplayMenuService <|-- DisplayMenuService : implements
+    IInputReaderService <|-- InputReaderService : implements
+```
+```mermaid
+classDiagram
     class IMathOperation {
-        Operation: Create(string operation)
+        + Operation: Create(string operation)
     }
 
     class MathOperation {
         + Operatoin: Create(string operation)
     }
 
+    IMathOperation <|-- MathOperation : implements
+```
+```mermaid
+classDiagram
     class Operation {
         + string: MathOperation
         + Operation(string mathOperation)
     }
-
-    ICalculatorService <|--  CalculatorService : implements
-    ICalculator <|-- Calculator : implements
-    IDisplayMenuService <|-- DisplayMenuService : implements
-    IInputReaderService <|-- InputReaderService : implements
-    IMathOperation <|-- MathOperation : implements
-    BackgroundService <|-- Calculator : Inheritance
 ```
