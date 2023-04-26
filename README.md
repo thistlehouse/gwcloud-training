@@ -9,3 +9,4 @@
     - Create methods in C# console applications Part 5
     - Debug C# console applications Part 6
 - Dependency Injection: Basic Math Operations
+- Dependency Injection: Basic Math Operations with Entity Framework
