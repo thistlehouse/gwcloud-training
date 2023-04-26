@@ -80,16 +80,24 @@ public class Calculator : BackgroundService, ICalculator
     public decimal PerformCalculation(int menuOptionIndex)
     {        
         var numbers = _inputReaderService.GetNumbers();
+        var result = 0.0m;
 
-        var result = menuOptionIndex switch
+        try
         {
-            1 => _calculatorService.Add(numbers["leftNumber"], numbers["rightNumber"]),
-            2 => _calculatorService.Subtract(numbers["leftNumber"], numbers["rightNumber"]),
-            3 => _calculatorService.Multiply(numbers["leftNumber"], numbers["rightNumber"]),
-            4 => _calculatorService.Divide(numbers["leftNumber"], numbers["rightNumber"]),
-            
-            _ => 0.0m
-        };
+            result = menuOptionIndex switch
+            {
+                1 => _calculatorService.Add(numbers["leftNumber"], numbers["rightNumber"]),
+                2 => _calculatorService.Subtract(numbers["leftNumber"], numbers["rightNumber"]),
+                3 => _calculatorService.Multiply(numbers["leftNumber"], numbers["rightNumber"]),
+                4 => _calculatorService.Divide(numbers["leftNumber"], numbers["rightNumber"]),            
+                _ => 0.0m
+            };            
+        }
+        catch (Exception e)
+        {            
+            Console.WriteLine($"Something went wrong: {e.Message}");  
+        }
+
 
         OperationResult operationResult = new OperationResult();        
 
@@ -111,15 +119,9 @@ public class Calculator : BackgroundService, ICalculator
                 break;
             case 4:
                 if (numbers["rightNumber"] > 0)
-                { 
-                    SaveCalculation("Division", operationResult);
-                }
+                   SaveCalculation("Division", operationResult);
                 else
-                {
-                    SaveCalculation("Division");
-
-                    Console.WriteLine("Cannot divide by zero.");
-                }
+                    SaveCalculation("Division");                
                 break;
         };
 
