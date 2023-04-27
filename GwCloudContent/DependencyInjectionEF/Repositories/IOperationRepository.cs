@@ -10,7 +10,6 @@ namespace DIEF.Repositories
     {
         List<Operation> GetAll();
         List<Operation> LastTenOperations();
-        void Create(Operation operation);
-        void Save();
+        Guid Create(Operation operation);
     }
 }

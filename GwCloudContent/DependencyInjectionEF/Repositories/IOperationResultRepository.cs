@@ -9,7 +9,6 @@ namespace DIEF.Repositories
     public interface IOperationResultRepository
     {
         List<OperationResult> GetAll();
-        void Create(OperationResult operationResult);
-        void Save();
+        void Create(OperationResult operationResult);        
     }
 }

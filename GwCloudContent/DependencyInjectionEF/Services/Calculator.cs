@@ -89,43 +89,30 @@ public class Calculator : BackgroundService, ICalculator
                 1 => _calculatorService.Add(numbers["leftNumber"], numbers["rightNumber"]),
                 2 => _calculatorService.Subtract(numbers["leftNumber"], numbers["rightNumber"]),
                 3 => _calculatorService.Multiply(numbers["leftNumber"], numbers["rightNumber"]),
-                4 => _calculatorService.Divide(numbers["leftNumber"], numbers["rightNumber"]),            
+                4 => _calculatorService.Divide(numbers["leftNumber"], numbers["rightNumber"]),                
                 _ => 0.0m
             };            
         }
         catch (Exception e)
-        {            
-            Console.WriteLine($"Something went wrong: {e.Message}");  
+        {
+            Console.WriteLine($"Something went wrong: {e.Message}");            
         }
-
-
-        OperationResult operationResult = new OperationResult();        
-
-        operationResult.Id = new Guid();
-        operationResult.Result = result;
-        operationResult.LeftNumber = numbers["leftNumber"];
-        operationResult.RightNumber = numbers["rightNumber"];
 
         switch (menuOptionIndex)
         {
             case 1:
-                SaveCalculation("Addition", operationResult);
+                SaveCalculation("Addition", result, numbers);
                 break;
             case 2:
-                SaveCalculation("Subtraction", operationResult);
+                SaveCalculation("Subtraction", result, numbers);
                 break;
             case 3:
-                SaveCalculation("Multiplication", operationResult);                
+                SaveCalculation("Multiplication", result, numbers);                
                 break;
-            case 4:
-                if (numbers["rightNumber"] > 0)
-                   SaveCalculation("Division", operationResult);
-                else
-                    SaveCalculation("Division");                
+            case 4:   
+                SaveCalculation("Division", result, numbers);
                 break;
         };
-
-        _operationResultRepository.Save();
 
         Console.WriteLine($"Result: {result}");
         Console.Clear();
@@ -133,28 +120,31 @@ public class Calculator : BackgroundService, ICalculator
         return result;
     }
 
-    public void SaveCalculation(string operationName)
+    public void SaveCalculation(string operationName,
+        decimal result,        
+        Dictionary<string, decimal> numbers)
     {
+        OperationResult operationResult = new OperationResult();
         Operation operation = _mathematicOperation.Create(operationName);
+
+        operation.LeftNumber = numbers["leftNumber"];
+        operation.RightNumber = numbers["rightNumber"];
+
+        var operationId = _operationRepository.Create(operation);        
+
+        operationResult.OperationId = operationId;
+        operationResult.Result = result;
+
+        if (numbers["rightNumber"] > 0)
+            _operationResultRepository.Create(operationResult);
+        else
+        {
+            Console.WriteLine("Are you trying to create a black hole, mate?");
         
-        _operationRepository.Create(operation);
-        _operationRepository.Save();
+            Thread.Sleep(1000);
+        }
     }
-
-    public void SaveCalculation(string operationName, OperationResult operationResult)
-    {
-        Operation operation = _mathematicOperation.Create(operationName);
-
-        _operationRepository.Create(operation);
-        _operationRepository.Save();
-
-        operationResult.OperationId = operation.Id;
-        operationResult.Operation = operation;
-
-        _operationResultRepository.Create(operationResult);
-        _operationResultRepository.Save();
-    }
-
+    
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         await Task.Delay(100, stoppingToken);

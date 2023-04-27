@@ -19,16 +19,12 @@ namespace DIEF.Repositories
         public void Create(OperationResult operationResult)
         {
             _diDbContext.OperationResults.Add(operationResult);
+            _diDbContext.SaveChanges();
         }
 
         public List<OperationResult> GetAll()
         {
             return _diDbContext.OperationResults.ToList();
-        }
-
-        public void Save()
-        {
-            _diDbContext.SaveChanges();
         }
 
         public void Update(OperationResult OperationResult)

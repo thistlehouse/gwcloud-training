@@ -10,6 +10,8 @@ namespace DI.Domain
     {
         public Guid Id { get; set; }
         public string MathOperation { get; set; }
+        public decimal LeftNumber { get; set; }
+        public decimal RightNumber { get; set; }
         public OperationResult OperationResult { get; set; }
 
         public Operation() {}

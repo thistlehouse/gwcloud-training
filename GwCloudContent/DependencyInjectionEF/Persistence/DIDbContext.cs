@@ -21,17 +21,15 @@ namespace DI.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Operation>()
-                .HasKey(e => e.Id);
-                // .HasOne(e => e.OperationResult)
-                // .WithOne(e => e.Operation);
-
-            modelBuilder.Entity<OperationResult>()
-                .HasKey(e => e.Id);
-
-            modelBuilder.Entity<OperationResult>()
-                .HasOne(e => e.Operation)
-                .WithOne(e => e.OperationResult)
+                .HasKey(e => e.Id);                
+            
+            modelBuilder.Entity<Operation>()
+                .HasOne(e => e.OperationResult)
+                .WithOne()
                 .HasForeignKey<OperationResult>(e => e.OperationId);
+
+            modelBuilder.Entity<OperationResult>()
+                .HasKey(e => e.Id);
         }
     }
 }

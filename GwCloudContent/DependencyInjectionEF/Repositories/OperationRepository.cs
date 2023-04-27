@@ -21,14 +21,16 @@ namespace DIEF.Repositories
             return _diDbContext.Operations.ToList();
         }
 
-        public void Create(Operation operation)
+        public Guid Create(Operation operation)
         {
             _diDbContext.Operations.Add(operation);
+            _diDbContext.SaveChanges();
+
+            return operation.Id;
         }
 
         public void Save()
         {
-            _diDbContext.SaveChanges();
         }
 
         public List<Operation> LastTenOperations()
