@@ -1,0 +1,7 @@
+POST http://localhost:5258/api/product/
+Content-Type: application/json
+
+{
+    "Name": "Teeth Cleaer Treats",
+    "Price": 17.87
+}

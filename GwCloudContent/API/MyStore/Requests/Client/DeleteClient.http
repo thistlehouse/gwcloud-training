@@ -1,0 +1,8 @@
+@id = "edaeb692-0417-4fae-a18e-768d7e5e0cea"
+
+POST http://localhost:5258/api/client/delete
+Content-Type: application/json
+
+{
+    "id": {{id}}
+}
