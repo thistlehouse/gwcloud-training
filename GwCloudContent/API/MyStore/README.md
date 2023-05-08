@@ -16,7 +16,6 @@
         - [Get Order Request](#get-order-request)
         - [Get Orders Request](#get-orders-request)
         - [Update Order Request](#update-order-request)
-        - [Remove Procuct](#delete-order-product-request)
 
 ## Client
 ### Create Client Request
