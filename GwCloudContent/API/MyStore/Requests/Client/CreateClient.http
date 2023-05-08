@@ -1,6 +1,6 @@
-POST http://localhost:5031/api/client
+POST http://localhost:5031/api/Customer
 Content-Type: application/json
 
 {
-    "name": "Create Client Test 1"
+    "name": "Create Customer Test 1"
 }

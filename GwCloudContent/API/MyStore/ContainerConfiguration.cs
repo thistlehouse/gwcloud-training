@@ -16,10 +16,10 @@ namespace MyStore
             builder.Services.AddControllers();
             builder.Services.AddDbContext<MyStoreDbContext>();            
             builder.Services.AddEndpointsApiExplorer();   
-            builder.Services.AddScoped<IClientRepository, ClientRepository>();
+            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-            builder.Services.AddScoped<IClientService, ClientService>();            
+            builder.Services.AddScoped<ICustomerService, CustomerService>();            
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<IProductService, ProductService>();            
             return builder.Build();

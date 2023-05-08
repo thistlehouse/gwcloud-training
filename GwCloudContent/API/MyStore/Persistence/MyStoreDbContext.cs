@@ -11,7 +11,7 @@ namespace MyStore.Persistence
             optionsBuilder.UseNpgsql(@"Server=localhost;Port=5432;Database=FicticiousStore;Uid=postgres;Pwd=r00t");
         }
 
-        public DbSet<Client> Clients => Set<Client>();
+        public DbSet<Customer> Customers => Set<Customer>();
         public DbSet<Product> Products => Set<Product>();
         public DbSet<Order> Orders => Set<Order>();
         public DbSet<OrderProduct> OrdersProducts => Set<OrderProduct>();
@@ -19,9 +19,9 @@ namespace MyStore.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>()
-                .HasOne(o => o.Client)
+                .HasOne(o => o.Customer)
                 .WithMany(c => c.Orders)
-                .HasForeignKey(o => o.ClientId);
+                .HasForeignKey(o => o.CustomerId);
 
             modelBuilder.Entity<OrderProduct>()
                 .HasKey(op => new { op.OrderId, op.ProductId });

@@ -31,7 +31,7 @@ namespace MyStore.Repositories
         public Order GetOrderById(Guid id)
         {
             return _myStoreContext.Orders
-                .Include(o => o.Client)
+                .Include(o => o.Customer)
                 .Include(o => o.OrderProducts)                                
                 .FirstOrDefault(o => o.Id == id);
         }

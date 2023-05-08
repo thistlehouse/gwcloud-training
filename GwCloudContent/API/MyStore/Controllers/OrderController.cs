@@ -64,7 +64,7 @@ namespace MyStore.Controllers
         private static OrderResponse MapOrderResponse(Order order)
         {
             return new OrderResponse(
-                order.ClientId,                
+                order.CustomerId,                
                 order.OrderProducts,
                 order.TotalToPay
             );
@@ -74,7 +74,7 @@ namespace MyStore.Controllers
         {
             return new Order(
                 request.Id,
-                request.ClientId,
+                request.CustomerId,
                 request.OrderProducts,
                 request.TotalToPay
             );

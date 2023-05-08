@@ -25,7 +25,7 @@ namespace MyStore.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MyStore.Models.Client", b =>
+            modelBuilder.Entity("MyStore.Models.Customer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,7 +37,7 @@ namespace MyStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clients");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("MyStore.Models.Order", b =>
@@ -46,7 +46,7 @@ namespace MyStore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ClientId")
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("TotalToPay")
@@ -54,7 +54,7 @@ namespace MyStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -100,13 +100,13 @@ namespace MyStore.Migrations
 
             modelBuilder.Entity("MyStore.Models.Order", b =>
                 {
-                    b.HasOne("MyStore.Models.Client", "Client")
+                    b.HasOne("MyStore.Models.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("ClientId")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Client");
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("MyStore.Models.OrderProduct", b =>
@@ -124,7 +124,7 @@ namespace MyStore.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MyStore.Models.Client", b =>
+            modelBuilder.Entity("MyStore.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
                 });

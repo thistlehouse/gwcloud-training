@@ -12,7 +12,7 @@ namespace MyStore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Clients",
+                name: "Customers",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -20,7 +20,7 @@ namespace MyStore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,16 +41,16 @@ namespace MyStore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ClientId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
                     TotalToPay = table.Column<decimal>(type: "numeric", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
+                        name: "FK_Orders_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -82,9 +82,9 @@ namespace MyStore.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_ClientId",
+                name: "IX_Orders_CustomerId",
                 table: "Orders",
-                column: "ClientId");
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrdersProducts_ProductId",
@@ -105,7 +105,7 @@ namespace MyStore.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Clients");
+                name: "Customers");
         }
     }
 }

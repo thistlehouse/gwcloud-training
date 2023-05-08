@@ -5,32 +5,32 @@ namespace MyStore.Models
     public class Order
     {
         public Guid Id { get; set; }
-        public Guid ClientId { get; set; }
+        public Guid CustomerId { get; set; }
 
         [JsonIgnore]
-        public Client Client { get; set; } 
+        public Customer Customer { get; set; } 
         public List<OrderProduct> OrderProducts { get; set; } = new();
         public decimal TotalToPay { get; set; }
 
         public Order() {}
 
         public Order(Guid id,
-            Guid clientId, 
+            Guid CustomerId, 
             List<OrderProduct> orderProducts,
             decimal totalToPay) 
         {
             Id = id;
-            ClientId = clientId;
+            CustomerId = CustomerId;
             OrderProducts = orderProducts;
             TotalToPay = totalToPay;
         }
 
         public Order( 
-            Guid clientId, 
+            Guid CustomerId, 
             List<OrderProduct> orderProducts,
             decimal totalToPay) 
         {
-            ClientId = clientId;
+            CustomerId = CustomerId;
             OrderProducts = orderProducts;
             TotalToPay = totalToPay;
         }

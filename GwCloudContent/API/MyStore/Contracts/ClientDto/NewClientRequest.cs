@@ -1,8 +1,8 @@
 using MyStore.Models;
 
-namespace MyStore.Contracts.ClientDto
+namespace MyStore.Contracts.CustomerDto
 {
-    public class NewClientRequest
+    public class NewCustomerRequest
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

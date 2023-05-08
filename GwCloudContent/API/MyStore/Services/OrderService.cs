@@ -8,15 +8,15 @@ namespace MyStore.Services
     public class OrderService : IOrderService
     {
         IOrderRepository _orderRepository;
-        IClientRepository _clientRepository;
+        ICustomerRepository _CustomerRepository;
         IProductRepository _productRepository;        
 
         public OrderService(IOrderRepository orderRepository, 
-            IClientRepository clientRepository, 
+            ICustomerRepository CustomerRepository, 
             IProductRepository productRepository)
         {
             _orderRepository = orderRepository;
-            _clientRepository = clientRepository;
+            _CustomerRepository = CustomerRepository;
             _productRepository = productRepository;
         }
 
@@ -32,7 +32,7 @@ namespace MyStore.Services
             Order order = new Order
             {
                 Id = Guid.NewGuid(),
-                ClientId = request.ClientId,
+                CustomerId = request.CustomerId,
                 OrderProducts = orderProducts,
                 TotalToPay = request.TotalToPay
             };             

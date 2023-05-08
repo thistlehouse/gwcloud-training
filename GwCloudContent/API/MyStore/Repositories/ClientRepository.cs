@@ -5,44 +5,44 @@ using MyStore.Repositories.Interfaces;
 
 namespace MyStore.Repositories
 {
-    public class ClientRepository : IClientRepository
+    public class CustomerRepository : ICustomerRepository
     {
         private readonly MyStoreDbContext _myStoreContext;
 
-        public ClientRepository(MyStoreDbContext myStoreContext)
+        public CustomerRepository(MyStoreDbContext myStoreContext)
         {
             _myStoreContext = myStoreContext;
         }
 
-        public Client CreateClient(Client client)
+        public Customer CreateCustomer(Customer Customer)
         {
-            _myStoreContext.Add(client);
+            _myStoreContext.Add(Customer);
             
             Save();
 
-            return client;
+            return Customer;
         }
     
-        public Client GetClientById(Guid id)
+        public Customer GetCustomerById(Guid id)
         {
-            return _myStoreContext.Clients
+            return _myStoreContext.Customers
                 .Include(c => c.Orders)
                 .ThenInclude(o => o.OrderProducts)
                 .FirstOrDefault(c => c.Id == id);
         }
 
-        public List<Client> GetClients()
+        public List<Customer> GetCustomers()
         {
-            return _myStoreContext.Clients.ToList();
+            return _myStoreContext.Customers.ToList();
         }
 
-        public Client UpdateClient(Client client)
+        public Customer UpdateCustomer(Customer Customer)
         {
-            _myStoreContext.Clients.Update(client);
+            _myStoreContext.Customers.Update(Customer);
 
             Save();
 
-            return client;
+            return Customer;
 
         }
 

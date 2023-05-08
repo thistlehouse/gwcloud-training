@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MyStore.Contracts.ClientDto
+namespace MyStore.Contracts.CustomerDto
 {
-    public class ClientByIdRequest
+    public class CustomerByIdRequest
     {
         public Guid Id { get; set; }
     }

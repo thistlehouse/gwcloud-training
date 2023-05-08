@@ -1,11 +1,11 @@
 # My Store API
 - [MyStore API](#my-store-store-api)
-    - [Client](#client)
-        - [Create Client Request](#create-client-request)
-        - [Get Client Request](#get-client-request)
-        - [Get Clients Request](#get-clients-request)
-        - [Update Client Request](#update-client-request)
-        - [Delete Client Request](#delete-client-request)
+    - [Customer](#Customer)
+        - [Create Customer Request](#create-Customer-request)
+        - [Get Customer Request](#get-Customer-request)
+        - [Get Customers Request](#get-Customers-request)
+        - [Update Customer Request](#update-Customer-request)
+        - [Delete Customer Request](#delete-Customer-request)
     - [Product](#product)
         - [Create Product Request](#create-product-request)
         - [Get Product Request](#get-product-request)
@@ -17,30 +17,30 @@
         - [Get Orders Request](#get-orders-request)
         - [Update Order Request](#update-order-request)
 
-## Client
-### Create Client Request
+## Customer
+### Create Customer Request
 ```js
-POST api/client/new
+POST api/Customer/new
 ```
 
-### Get Clients Request
+### Get Customers Request
 ```js
-POST api/client/clients
+POST api/Customer/Customers
 ```
 
-### Get Client Request
+### Get Customer Request
 ```js
-GET api/client/client
+GET api/Customer/Customer
 ```
 
-### Update Client Request
+### Update Customer Request
 ```js
-PUT api/client/update
+PUT api/Customer/update
 ```
 
-### Delete Client Request
+### Delete Customer Request
 ```js
-DELETE api/client/delete
+DELETE api/Customer/delete
 ```
 
 ## Product

@@ -1,82 +1,82 @@
 using MyStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using MyStore.Services.Interfaces;
-using MyStore.Contracts.ClientDto;
+using MyStore.Contracts.CustomerDto;
 
 namespace MyStore.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ClientController : ControllerBase
+    public class CustomerController : ControllerBase
     {
-        private readonly IClientService _clientService;
+        private readonly ICustomerService _CustomerService;
         
-        public ClientController(IClientService clientService)
+        public CustomerController(ICustomerService CustomerService)
         {
-            _clientService = clientService;
+            _CustomerService = CustomerService;
         }
 
         [HttpPost("new")]
-        public ActionResult<ClientResponse> CreateClient(ClientRequest request)
+        public ActionResult<CustomerResponse> CreateCustomer(CustomerRequest request)
         {
-            Client client = MapClientRequest(request);
-            Client clientResponse = _clientService.CreateClient(client);
+            Customer Customer = MapCustomerRequest(request);
+            Customer CustomerResponse = _CustomerService.CreateCustomer(Customer);
             
-            return CreatedAsGetClient(clientResponse);
+            return CreatedAsGetCustomer(CustomerResponse);
         }
 
-        [HttpPost("client")]
-        public ActionResult<ClientResponse> GetClientById([FromBody] Guid id)
+        [HttpPost("Customer")]
+        public ActionResult<CustomerResponse> GetCustomerById([FromBody] Guid id)
         {
-            Client client = _clientService.GetClientById(id);
+            Customer Customer = _CustomerService.GetCustomerById(id);
             
-            return Ok(MapClientResponse(client));
+            return Ok(MapCustomerResponse(Customer));
         }
 
-        [HttpGet("clients")]
-        public List<ClientResponse> GetClients()
+        [HttpGet("Customers")]
+        public List<CustomerResponse> GetCustomers()
         {
-            List<Client> clients = _clientService.GetClients();
-            List<ClientResponse> clientsResponse = clients.Select(c => MapClientResponse(c)).ToList();
+            List<Customer> Customers = _CustomerService.GetCustomers();
+            List<CustomerResponse> CustomersResponse = Customers.Select(c => MapCustomerResponse(c)).ToList();
 
-            return clientsResponse;
+            return CustomersResponse;
         }
 
         [HttpPut("update")]
-        public ActionResult<ClientResponse> UpdateClient(ClientRequest request)
+        public ActionResult<CustomerResponse> UpdateCustomer(CustomerRequest request)
         {
-            Client client = MapClientRequest(request);
+            Customer Customer = MapCustomerRequest(request);
 
-            _clientService.UpdateClient(client);
+            _CustomerService.UpdateCustomer(Customer);
 
-            ClientResponse clientResponse = MapClientResponse(client);
+            CustomerResponse CustomerResponse = MapCustomerResponse(Customer);
 
-            return Ok(clientResponse);
+            return Ok(CustomerResponse);
         }
 
-        private static ClientResponse MapClientResponse(Client client)
+        private static CustomerResponse MapCustomerResponse(Customer Customer)
         {
-            return new ClientResponse(                
-                client.Name,
-                client.Orders
+            return new CustomerResponse(                
+                Customer.Name,
+                Customer.Orders
             );
         }
 
-        private static Client MapClientRequest(ClientRequest request)
+        private static Customer MapCustomerRequest(CustomerRequest request)
         {
-            return new Client(
+            return new Customer(
                 request.Id,
                 request.Name,
                 request.Orders
             );
         }
 
-        private CreatedAtActionResult CreatedAsGetClient(Client client)
+        private CreatedAtActionResult CreatedAsGetCustomer(Customer Customer)
         {
             return CreatedAtAction(
-                actionName: nameof(GetClientById),
-                routeValues: new {id = client.Id},
-                value: MapClientResponse(client)
+                actionName: nameof(GetCustomerById),
+                routeValues: new {id = Customer.Id},
+                value: MapCustomerResponse(Customer)
             );
         }
     }

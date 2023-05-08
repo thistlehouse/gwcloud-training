@@ -1,8 +1,8 @@
 using MyStore.Models;
 
-namespace MyStore.Contracts.ClientDto
+namespace MyStore.Contracts.CustomerDto
 {
-    public record ClientResponse( 
+    public record CustomerResponse( 
         string Name,
         List<Order> Orders
     );

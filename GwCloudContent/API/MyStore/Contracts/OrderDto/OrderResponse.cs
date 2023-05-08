@@ -3,7 +3,7 @@ using MyStore.Models;
 namespace MyStore.Contracts.OrderDto
 {
     public record OrderResponse(
-        Guid ClientId,       
+        Guid CustomerId,       
         List<OrderProduct> OrderProducts,
         decimal TotalToPay
     );

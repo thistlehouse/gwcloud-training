@@ -6,12 +6,12 @@ using MyStore.Models;
 
 namespace MyStore.Repositories.Interfaces
 {
-    public interface IClientRepository
+    public interface ICustomerRepository
     {
-        Client CreateClient(Client client);        
-        List<Client> GetClients();
-        Client GetClientById(Guid id);
-        Client UpdateClient(Client client);
+        Customer CreateCustomer(Customer Customer);        
+        List<Customer> GetCustomers();
+        Customer GetCustomerById(Guid id);
+        Customer UpdateCustomer(Customer Customer);
         void Save();
     }
 }

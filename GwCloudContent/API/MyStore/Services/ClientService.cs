@@ -4,42 +4,42 @@ using MyStore.Services.Interfaces;
 
 namespace MyStore.Services
 {
-    public class ClientService : IClientService
+    public class CustomerService : ICustomerService
     {
-        private readonly IClientRepository _clientRepository;
+        private readonly ICustomerRepository _CustomerRepository;
 
-        public ClientService(IClientRepository clientRepository)
+        public CustomerService(ICustomerRepository CustomerRepository)
         {
-            _clientRepository = clientRepository;
+            _CustomerRepository = CustomerRepository;
         }
 
-        public Client CreateClient(Client client)
+        public Customer CreateCustomer(Customer Customer)
         {
-            if (client is null)
-                Console.WriteLine($"Treat for error: {client} is null");
+            if (Customer is null)
+                Console.WriteLine($"Treat for error: {Customer} is null");
             
-            _clientRepository.CreateClient(client);
+            _CustomerRepository.CreateCustomer(Customer);
 
-            return client;
+            return Customer;
         }
         
-        public List<Client> GetClients()
+        public List<Customer> GetCustomers()
         {
-            return  _clientRepository.GetClients();            
+            return  _CustomerRepository.GetCustomers();            
         }
 
-        public Client GetClientById(Guid id)
+        public Customer GetCustomerById(Guid id)
         {
-            return _clientRepository.GetClientById(id);
+            return _CustomerRepository.GetCustomerById(id);
         }
 
-        public Client UpdateClient(Client request)
+        public Customer UpdateCustomer(Customer request)
         {
-            Client client = _clientRepository.GetClientById(request.Id);
+            Customer Customer = _CustomerRepository.GetCustomerById(request.Id);
 
-            client.Name = request.Name;
+            Customer.Name = request.Name;
 
-            return _clientRepository.UpdateClient(client);
+            return _CustomerRepository.UpdateCustomer(Customer);
         }
     }
 }

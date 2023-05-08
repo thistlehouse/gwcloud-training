@@ -1,6 +1,6 @@
 @id = "046c745b-9080-4b6e-b99c-0403a87d4ec2"
 
-POST http://localhost:5031/api/client/get
+POST http://localhost:5031/api/Customer/get
 Content-Type: application/json
 
 {

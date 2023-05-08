@@ -4,13 +4,13 @@ using MyStore.Persistence;
 
 public static class FakeDataGenerator
 {
-    public static List<Client> GenerateClients(int count)
+    public static List<Customer> GenerateCustomers(int count)
     {
-        var clients = new Faker<Client>()
+        var Customers = new Faker<Customer>()
             .RuleFor(c => c.Name, f => f.Name.FullName())
             .Generate(count);
 
-        return clients;
+        return Customers;
     }
 
     public static List<Product> GenerateProducts(int count)
@@ -23,10 +23,10 @@ public static class FakeDataGenerator
         return products;
     }
 
-    // public static List<Order> GenerateOrders(int count, List<Client> clients, List<Product> products)
+    // public static List<Order> GenerateOrders(int count, List<Customer> Customers, List<Product> products)
     // {
     //     var orders = new Faker<Order>()
-    //         .RuleFor(o => o.ClientId, f => f.PickRandom(clients).Id)            
+    //         .RuleFor(o => o.CustomerId, f => f.PickRandom(Customers).Id)            
     //         .RuleFor(o => o.OrderProducts, f =>
     //             new Faker<OrderProduct>()
     //                 .RuleFor(op => op.ProductId, p => p.PickRandom(products).Id)
@@ -42,15 +42,15 @@ public static class FakeDataGenerator
 
     public static void GenerateFakeData()
     {
-        List<Client> clients = FakeDataGenerator.GenerateClients(50);
+        List<Customer> Customers = FakeDataGenerator.GenerateCustomers(50);
         List<Product> products = FakeDataGenerator.GenerateProducts(100);
-        // List<Order> orders = FakeDataGenerator.GenerateOrders(20, clients, products);
+        // List<Order> orders = FakeDataGenerator.GenerateOrders(20, Customers, products);
 
         MyStoreDbContext _doggoDbContext = new();
 
-        if (!_doggoDbContext.Clients.Any())
+        if (!_doggoDbContext.Customers.Any())
         {
-            _doggoDbContext.Clients.AddRange(clients);
+            _doggoDbContext.Customers.AddRange(Customers);
             _doggoDbContext.SaveChanges();
         }
 
