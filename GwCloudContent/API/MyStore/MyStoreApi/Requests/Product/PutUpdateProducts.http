@@ -1,0 +1,8 @@
+PUT http://localhost:5258/api/product/
+Content-Type: application/json
+
+{
+    "id": "dcf144b4-dfe4-44c1-96fa-16b5bf21cab9",
+    "Name": "Stainless Steel Collar",
+    "Price": 17.87
+}
