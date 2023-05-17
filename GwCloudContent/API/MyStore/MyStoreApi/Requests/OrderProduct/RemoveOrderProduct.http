@@ -1,7 +1,0 @@
-DELETE http://localhost:5031/api/order/products/remove
-Content-Type: application/json
-
-{
-    "productId": "1526a84f-5e0f-4103-be98-54e3b325a8b0",
-    "orderId": "4acc3d05-138d-46ea-a85f-d35ed1519ecc"
-}
