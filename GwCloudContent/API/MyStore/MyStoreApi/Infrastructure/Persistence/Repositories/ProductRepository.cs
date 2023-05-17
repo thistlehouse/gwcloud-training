@@ -1,7 +1,6 @@
 using MyStoreApi.Domain.Models;
 using MyStoreApi.Application.Interfaces;
 using MyStoreApi.Infrastructure.Persistence;
-using MyStoreApi.Contracts.ProductDto;
 
 namespace MyStoreApi.Repositories
 {
@@ -13,7 +12,7 @@ namespace MyStoreApi.Repositories
         {
             _myStoreApiContext = myStoreApiContext;
         }
-        
+
         public void CreateProduct(Product product)
         {
             _myStoreApiContext.Products.Add(product);

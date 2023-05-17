@@ -13,12 +13,16 @@ namespace MyStoreApi.Domain.Models
         public Customer(Guid id)
         {
             Id = id;
+
+            Validate(this, new CustomerValidator());
         }
 
         public Customer(Guid id, string name)
         {
             Id = id;
             Name = name;
+
+            Validate(this, new CustomerValidator());
         }
 
         public Customer(Guid id, string name, List<Order> orders)
@@ -26,6 +30,8 @@ namespace MyStoreApi.Domain.Models
             Id = id;
             Name = name;
             Orders = orders;
+
+            Validate(this, new CustomerValidator());
         }
     }
 }

@@ -26,7 +26,7 @@ namespace MyStore.xUnit.Builders
 
             foreach (var product in products)
             {
-                OrderProduct orderPoduct = new OrderProduct
+                OrderProduct orderProduct = new OrderProduct
                 {
                     OrderId = orderId,
                     ProductId = product.Id,
@@ -34,7 +34,7 @@ namespace MyStore.xUnit.Builders
                     Quantity = 1
                 };
 
-                orderProducts.Add(orderPoduct);
+                orderProducts.Add(orderProduct);
             }
 
             return new OrderFluent()
@@ -52,8 +52,8 @@ namespace MyStore.xUnit.Builders
         }
 
         public Order Build() =>
-            new Order(Id, CustomerId,Customer,
-                OrderProducts, Coupon, TotalToPay);
+            new Order(Id, CustomerId, Customer,
+                OrderProducts, Coupon);
 
         public OrderFluent WithId(Guid id)
         {

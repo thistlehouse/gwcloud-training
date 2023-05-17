@@ -19,6 +19,8 @@ namespace MyStoreApi.Domain.Models
             Id = id;
             Name = name;
             Price = price;
+
+            Validate(this, new ProductValidator());
         }
 
         public Product(string name,
@@ -28,6 +30,8 @@ namespace MyStoreApi.Domain.Models
             Name = name;
             Price = price;
             OrderProducts = orderProducts;
+
+            Validate(this, new ProductValidator());
         }
 
         public Product(Guid id,
@@ -39,6 +43,8 @@ namespace MyStoreApi.Domain.Models
             Name = name;
             Price = price;
             OrderProducts = orderProducts;
+
+            Validate(this, new ProductValidator());
         }
     }
 }

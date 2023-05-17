@@ -51,7 +51,9 @@ namespace MyStore.xUnit.Infrastructure
             var product = ProductFluent.New()
                 .Build();
 
-            _productRespository.CreateProduct(product);
+            if (product.IsValid)
+                _productRespository.CreateProduct(product);
+
             _myStoreDbContext.Products.Should().Contain(product);
         }
 
@@ -59,9 +61,14 @@ namespace MyStore.xUnit.Infrastructure
         public void CreateProduct_ShouldNot_AddToDatabase()
         {
             var product = ProductFluent.New()
+                .WithId(default(Guid))
+                .WithName("ABCDEFGHIJKLMNOPQRSTUVWYXZABCDEFGHIJKLMNOPQRSTUVWYXZ01234")
+                .WithPrice(0)
                 .Build();
 
-            _productRespository.CreateProduct(new Product());
+            if (product.IsValid)
+                _productRespository.CreateProduct(product);
+
             _myStoreDbContext.Products.Should().NotContain(product);
         }
 
@@ -79,7 +86,8 @@ namespace MyStore.xUnit.Infrastructure
                 16.57m,
                 result.OrderProducts);
 
-            _productRespository.UpdateProduct(productToUpdate);
+            if (product.IsValid)
+                _productRespository.UpdateProduct(productToUpdate);
 
             _myStoreDbContext.Products.Should().Contain(productToUpdate);
         }
@@ -94,11 +102,12 @@ namespace MyStore.xUnit.Infrastructure
 
             var result = _productRespository.GetProductById(product.Id);
 
-            Product productToUpdate = new Product(result.Name,
-                16.57m,
+            Product productToUpdate = new Product("ABCDEFGHIJKLMNOPQRSTUVWYXZABCDEFGHIJKLMNOPQRSTUVWYXZ",
+                -16.57m,
                 result.OrderProducts);
 
-            _productRespository.UpdateProduct(product);
+            if (productToUpdate.IsValid)
+                _productRespository.UpdateProduct(product);
 
             _myStoreDbContext.Products.Should().Contain(product);
         }

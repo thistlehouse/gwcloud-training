@@ -24,6 +24,7 @@ namespace MyStore.xUnit.Domain
             var order = OrderFluent.New()
                 .Build();
 
+            Console.WriteLine(order.ValidationResult);
             order.IsValid.Should().BeTrue();
         }
 
