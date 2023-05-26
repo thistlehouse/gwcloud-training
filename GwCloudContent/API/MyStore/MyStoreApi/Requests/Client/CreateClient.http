@@ -1,0 +1,6 @@
+POST http://localhost:5031/api/Customer
+Content-Type: application/json
+
+{
+    "name": "Create Customer Test 1"
+}
