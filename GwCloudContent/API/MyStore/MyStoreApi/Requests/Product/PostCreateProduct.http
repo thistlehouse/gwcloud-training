@@ -1,0 +1,37 @@
+POST http://localhost:5258/api/product/new
+Content-Type: application/json
+
+{
+    "Name": "Teeth Cleaner Treats",
+    "Price": 17.87
+}
+
+###
+
+POST http://localhost:5258/api/product/new
+Content-Type: application/json
+
+{
+    "Name": "Salty Dry Meat",
+    "Price": 5.89
+}
+
+###
+
+POST http://localhost:5258/api/product/new
+Content-Type: application/json
+
+{
+    "Name": "Daisy Bloomer",
+    "Price": 2.87
+}
+
+###
+
+POST http://localhost:5258/api/product/new
+Content-Type: application/json
+
+{
+    "Name": "Cara Tyre 17 inch",
+    "Price": 189.12
+}

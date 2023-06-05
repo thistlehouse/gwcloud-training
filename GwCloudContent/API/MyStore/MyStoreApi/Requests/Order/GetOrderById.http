@@ -1,0 +1,7 @@
+POST http://localhost:5031/api/order/order
+Content-Type: application/json
+
+{
+    "id": "71a5b607-ff2b-4a2f-8d1c-91d95b95b754"
+}
+

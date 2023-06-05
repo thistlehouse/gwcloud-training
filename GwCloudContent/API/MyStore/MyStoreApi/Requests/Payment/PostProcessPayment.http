@@ -1,0 +1,13 @@
+POST http://localhost:5031/api/payment
+Content-Type: application/json
+
+{
+    "orderId": "71a5b607-ff2b-4a2f-8d1c-91d95b95b754",
+    "creditCard": {
+        "number": "4317287093903444",
+        "cvv": "333",
+        "name": "Jhon Doe",
+        "expireMonth": 7,
+        "expireYear": 2025
+    }
+}

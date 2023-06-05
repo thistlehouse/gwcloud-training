@@ -1,0 +1,16 @@
+POST http://localhost:5031/api/product/product
+Content-Type: application/json
+
+{
+    "id": "ee26bd9b-ad8e-4cc7-9443-c295268050b8"
+}
+
+###
+
+POST http://localhost:5031/api/product/product
+Content-Type: application/json
+
+{
+    "id": "eee3ee1f-d8f1-4b92-bb36-cc1d35d87bcd"
+}
+

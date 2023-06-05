@@ -1,0 +1,67 @@
+POST http://localhost:5031/api/order/new
+Content-Type: application/json
+
+{
+    "CustomerId": "130c64a8-9ead-4ca8-8ece-5a14c119a525",
+    "orderProducts": [
+        {
+            "productId": "ee26bd9b-ad8e-4cc7-9443-c295268050b8",
+            "quantity": 1
+        },
+        {
+            "productId": "efd9936e-8560-4824-ad31-fddec0ee2a4b",
+            "quantity": 1
+        }
+    ],
+    "coupon": {
+        "code": "black friday"
+    }
+}
+
+###
+
+POST http://localhost:5031/api/order/new
+Content-Type: application/json
+
+{
+    "customerId": "1557fc71-17d2-4f36-88b6-96944f9f1df5",
+    "orderProducts": [
+        {
+            "productId": "fd6c7b81-4138-4427-8de8-9ae0c91e9b4b",
+            "quantity": 1
+        },
+        {
+            "productId": "fa8ca79d-6e5a-48c2-aaff-474b4f51fdfe",
+            "quantity": 2
+        },
+        {
+            "productId": "f6c9dee5-48e8-48e8-b522-fdda9a485db4",
+            "quantity": 1
+        },
+        {
+            "productId": "f665d01e-edb5-4955-9e08-7c2edeaa9302",
+            "quantity": 3
+        }
+    ],
+    "coupon": {
+        "code": "black friday"
+    }
+}
+
+###
+
+POST http://localhost:5031/api/order/new
+Content-Type: application/json
+
+{
+    "CustomerId": "0eed1cd7-e9cb-449a-97e2-234ab368b012",
+    "orderProducts": [
+        {
+            "productId": "fd6c7b81-4138-4427-8de8-9ae0c91e9b4b",
+            "quantity": 1
+        }
+    ],
+    "coupon": {
+        "code": "black friday"
+    }
+}
