@@ -1,8 +1,0 @@
-POST http://localhost:5031/api/order/order
-Content-Type: application/json
-
-{
-    "id": "d3f27481-77c5-45db-be1f-984b24fdd9af"
-}
-
-

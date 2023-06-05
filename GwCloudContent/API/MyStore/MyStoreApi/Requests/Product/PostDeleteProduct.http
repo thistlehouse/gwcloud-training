@@ -1,6 +1,0 @@
-POST http://localhost:5258/api/product/delete
-Content-Type: application/json
-
-{
-    "id": "f9a1d75a-dbe9-49dc-8c1c-087ad7faec9c"
-}

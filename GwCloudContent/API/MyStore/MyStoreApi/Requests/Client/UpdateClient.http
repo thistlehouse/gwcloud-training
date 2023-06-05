@@ -1,7 +1,0 @@
-PUT http://localhost:5031/api/Customer/update
-Content-Type: application/json
-
-{
-    "id": "5fd2f8b9-c59e-424c-811e-b7f479f9b81c",
-    "name": "Create Customer Test 1 (Update)"
-}
